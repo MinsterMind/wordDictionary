@@ -23,7 +23,16 @@ const getWords = async function (pageNumber, pageLimit) {
     return wordRecords
 }
 
+const deleteWord = async function (word) {
+    return await Word.remove({word: word})
+}
+
+const updateWord = async function (word) {
+    return Word.update({word: word.word}, {meaning:word.meaning, synonyms:word.synonyms})
+}
 module.exports = {
     addWord,
-    getWords
+    getWords,
+    deleteWord,
+    updateWord
 }

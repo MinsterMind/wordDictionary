@@ -18,10 +18,10 @@ module.exports = [
         }
     },
     {
-        method: 'GET',
+        method: 'Delete',
         path: '/api/word/{id}',
         handler: function (req, h) {
-            return `id: ${req.params.id}`
+            return wordController.deleteWord(req.params.id)
         }
     },
     {
@@ -32,6 +32,21 @@ module.exports = [
                 const data = req.payload
                 const wordData = _.isString(data)?JSON.parse(data): data
                 await wordController.addWord(wordData)
+                return h.response('success')
+            } catch (ex) {
+                return h.response("Cannot add word").code(406)
+            }
+
+        }
+    },
+    {
+        method: 'PUT',
+        path: '/api/word',
+        handler: async function (req, h) {
+            try {
+                const data = req.payload
+                const wordData = _.isString(data)?JSON.parse(data): data
+                await wordController.updateWord(wordData)
                 return h.response('success')
             } catch (ex) {
                 return h.response("Cannot add word").code(406)
