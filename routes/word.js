@@ -8,10 +8,11 @@ module.exports = [
         method: 'GET',
         path: '/api/word',
         handler: async function (req, h) {
-            const pageNumber = parseInt(req.query.pageNumber) || 0
+            // const pageNumber = parseInt(req.query.pageNumber) || 0
             const pageLimit =   parseInt(req.query.pageLimit) || 3
+            const nextId = req.query.nextId !== "undefined" ? req.query.nextId: null
             try {
-                return await wordController.getWords(pageNumber, pageLimit)
+                return await wordController.getWords(nextId, pageLimit)
             } catch (ex) {
                 console.log(ex)
             }

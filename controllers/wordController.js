@@ -6,8 +6,8 @@ const addWord = async function (word) {
     await wordModel.addWord(word)
 }
 
-const getWords = async function (pageNumber, pageLimit) {
-    return await wordModel.getWords(pageNumber, pageLimit)
+const getWords = async function (nextId, pageLimit) {
+    return await wordModel.getWords(nextId, pageLimit)
 }
 
 const deleteWord = async function (word) {

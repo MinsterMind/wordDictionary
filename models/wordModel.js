@@ -18,8 +18,12 @@ const addWord = async function (word) {
     return await newWord.save()
 }
 
-const getWords = async function (pageNumber, pageLimit) {
-    const wordRecords = await Word.find({}).sort({_id: -1}).skip(pageNumber*pageLimit).limit(pageLimit).exec()
+const getWords = async function (nextId, pageLimit) {
+    const options = {}
+    if(nextId) {
+        options['_id'] = {$lt: nextId}
+    }
+    const wordRecords = await Word.find(options).sort({_id: -1}).limit(pageLimit).exec()
     return wordRecords
 }
 
